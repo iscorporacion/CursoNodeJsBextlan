@@ -5,10 +5,14 @@ export class Persona {
 
     constructor(nombre: string) {
         this.nombre = nombre;
-    };
+    }
 
     imprimir() {
         console.log(`${this.nombre} - ${this.apellido}`);
-    };
+    }
+
+    imprimir2() {
+        console.log(`${this.nombre} - ${this.apellido}`);
+    }
 }
 
