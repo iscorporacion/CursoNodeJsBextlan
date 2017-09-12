@@ -9,10 +9,10 @@ var http = require('http'),
     htmlCode = ''
 
 function httpClient(res) {
-    console.log(`el sitio ${options.host} ha respondido. Codigo de estado: ${res.statusCode}`)
+    console.log(`el sitio ${options.host} ha respondido1. Codigo de estado: ${res.statusCode}`)
     res.on('data', function(data) {
         htmlCode += data
-        console.log(data)
+        console.log(data, data.toString())
     })
 }
 
