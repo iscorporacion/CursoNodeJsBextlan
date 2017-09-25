@@ -1,0 +1,17 @@
+{
+  "name": "templates-engines",
+  "version": "0.0.1",
+  "description": "ejercicio como usar motores de plantillas de jade y ejs para express",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "supervisor server.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.4",
+    "jade": "^1.11.0",
+    "serve-favicon": "^2.4.4"
+  }
+}

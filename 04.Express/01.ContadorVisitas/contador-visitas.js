@@ -6,7 +6,7 @@ var express = require('express'),
 
 app
     .use(cookieParser())
-    .use(cookieSession({ secret: "secreto", maxAge: 10000 }))
+    .use(cookieSession({ secret: "secreto", maxAge: 5000 }))
     .get('/', (req, res) => {
         req.sessionOptions.maxAge = req.session.maxAge || req.sessionOptions.maxAge
 
