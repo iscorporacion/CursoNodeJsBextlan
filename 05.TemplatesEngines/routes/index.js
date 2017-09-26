@@ -5,7 +5,9 @@ var express = require('express'),
 
 function jade(req, res, next) {
     let locals = {
-        title: 'Jade'
+        title: 'Jade2',
+        link: 'http://jade-lang.com/',
+        descripcion: 'descripcion de jade por parametro'
     }
     res.render('index', locals)
 }
