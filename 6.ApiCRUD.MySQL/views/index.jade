@@ -5,19 +5,39 @@ block title
     title=title
 
 block content
-    // comentario html se ve en navegador
-    //- Comentario en jade no visible en navegador
-    article#jade.container
-        h1 
-            a(href="#{link}", target="_blank")=title
-        p=descripcion
-
-    article.container
-        h2 Estructura básica Jade
-        p este archivo es generado por motor de plantillas jade
-        p
-            |Para contenar contenido
-            |en varias lineas
-            |se utiliza el pipe
-    
-    include logo
+    section.container
+        include header.jade
+        article.item
+            -if(data.length)
+                table.table 
+                    tr 
+                        th Id
+                        th Titulo
+                        th Año
+                        th Puntuación
+                        th Poster
+                        th(colspan="2")
+                            form(action="/agregar", method="get")       
+                                input.button.add(type="submit", value="Agregar")                 
+                    -each movie in data
+                        tr
+                            td #{movie.movie_id}
+                            td #{movie.title}
+                            td #{movie.release_year}
+                            td #{movie.rating}  
+                            td
+                                img.poster(src="#{movie.image}", alt="#{movie.title}")                                
+                            td
+                                form(action="/editar/#{movie.movie_id}", method="GET")       
+                                    input.button.edit(type="submit", value="Editar")
+                            td
+                                form(action="/eliminar/#{movie.movie_id}", method="POST")       
+                                    input.button.delete(type="button", value="Eliminar" onclick="eliminar(this)")
+                
+                script.
+                    function eliminar(){
+                        var deleteOK = confirm('¿estas seguro de eliminar la pelicula?')
+                        return (deleteOK) ? input.parentNode.submit() : false
+                    }
+            -else
+                p.error No existen peliculas en la base de datos

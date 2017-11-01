@@ -21,7 +21,7 @@ app
     //parse application/json
     .use(bodyParser.json())
     //parse application/x-www-form-urlencoded
-    .use(bodyParser.urlencoded({ extended: fase }))
+    .use(bodyParser.urlencoded({ extended: false }))
     .use(publicDir)
     //ejecutando el middlewares enrutador
     .use(routes)

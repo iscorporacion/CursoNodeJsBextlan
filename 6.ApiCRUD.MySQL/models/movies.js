@@ -9,6 +9,6 @@ var mysql = require('mysql'), // node-mysql module
         password: 'exodus',
         database: 'movies'
     },
-    Movies = myConnection(mysql, dbOptions, 'single')
+    Movies = myConnection(mysql, dbOptions, 'request')
 
 module.exports = Movies
