@@ -25,12 +25,16 @@ router
     .get('/', (req, res, next) => {
         req.getConnection((err, movies) => {
             movies.query('select * from movie', (err, rows) => {
-                let locals = {
-                    title: 'Lista peliculas',
-                    data: rows
-                }
+                if (err) {
+                    next(new Error('No hay registros'))
+                } else {
+                    let locals = {
+                        title: 'Lista peliculas',
+                        data: rows
+                    }
 
-                res.render('index', locals)
+                    res.render('index', locals)
+                }
             })
         })
 
@@ -52,7 +56,7 @@ router
             console.log(movie)
 
             movies.query('insert into movie set ?', movie, (err, rows) => {
-                return (err) ? res.redirect('/agregar') : res.redirect('/')
+                return (err) ? next(new Error('Hubo un error al insertar')) : res.redirect('/')
             })
         })
     })
@@ -66,7 +70,7 @@ router
                 console.log(err, '---', rows)
 
                 if (err) {
-                    throw (err)
+                    next(new Error('Registro no encontrado'))
                 } else {
                     let locals = {
                         title: 'Editar Pelicula',
@@ -91,24 +95,18 @@ router
             console.log(movie)
 
             movies.query('update movie set ? where movie_id=?', [movie, movie.movie_id], (err, rows) => {
-                return (err) ? res.redirect('/editar/:movie_id') : res.redirect('/')
+                return (err) ? next(new Error('Erro al actualizar')) : res.redirect('/')
             })
         })
     })
     .post('/eliminar/:movie_id', (req, res, next) => {
+        let movie_id = req.params.movie_id
+
+        console.log(movie_id)
         req.getConnection((err, movies) => {
-            let movie = {
-                movie_id: req.body.movie_id,
-                title: req.body.title,
-                release_year: req.body.release_year,
-                rating: req.body.rating,
-                image: req.body.image
-            }
 
-            console.log(movie)
-
-            movies.query('delete movie where movie_id=?', movie.movie_id, (err, rows) => {
-                return (err) ? res.redirect('/editar/:movie_id') : res.redirect('/')
+            movies.query('delete from movie where movie_id=?', movie_id, (err, rows) => {
+                return (err) ? next(new Error('Registro no encontrado')) : res.redirect('/')
             })
         })
     })
