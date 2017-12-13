@@ -1,12 +1,13 @@
 'use strict'
 
 var mysql = require('mysql'), // node-mysql module
+    conf = require('./db-conf'),
     dbOptions = {
-        host: 'localhost',
-        port: 3308,
-        user: 'admin',
-        password: 'exodus',
-        database: 'movies'
+        host: conf.mysql.host,
+        port: conf.mysql.port,
+        user: conf.mysql.user,
+        password: conf.mysql.pass,
+        database: conf.mysql.db
     },
     myConnection = mysql.createConnection(dbOptions)
 

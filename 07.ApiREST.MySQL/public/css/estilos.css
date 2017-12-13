@@ -70,6 +70,7 @@ fieldset {
     background-color: #0871B2;
 }
 
-.delete {
+.delete,
+.err {
     background-color: #D23641;
 }
